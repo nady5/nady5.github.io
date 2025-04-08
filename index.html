@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>موقع نادي الشخصي</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: black;
+      color: #eee;
+      overflow-x: hidden;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+    .container {
+      text-align: center;
+      padding: 60px 20px;
+      position: relative;
+      z-index: 1;
+    }
+    h1 {
+      color: #00ff99;
+      font-size: 3em;
+      animation: fadeIn 2s ease;
+    }
+    p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease 0.5s;
+    }
+    img {
+      max-width: 300px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease 1s;
+    }
+    .buttons a {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 24px;
+      background-color: #00ff99;
+      color: #000;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .buttons a:hover {
+      background-color: #00cc77;
+      transform: scale(1.05);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+<canvas id="matrix"></canvas>
+<div class="container">
+  <h1>أهلاً! أنا نادي 👨‍💻</h1>
+  <p>باحب الأمن السيبراني والاختبار الأخلاقي للاختراق 🔐</p>
+  <img src="https://i.imgur.com/JV0Hq7W.jpg" alt="هاكر">
+  <div class="buttons">
+    <a href="https://t.me/yourusername" target="_blank">تيليجرام</a>
+    <a href="https://instagram.com/yourusername" target="_blank">إنستجرام</a>
+    <a href="mailto:yourmail@example.com">راسلني</a>
+    <a href="cv.pdf" download>📄 تحميل السيرة الذاتية</a>
+  </div>
+</div>
+
+<script>
+// Matrix effect
+var c = document.getElementById("matrix");
+var ctx = c.getContext("2d");
+c.height = window.innerHeight;
+c.width = window.innerWidth;
+var letters = "01";
+letters = letters.split("");
+var fontSize = 14;
+var columns = c.width / fontSize;
+var drops = [];
+for (var x = 0; x < columns; x++) drops[x] = 1;
+function draw() {
+  ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+  ctx.fillRect(0, 0, c.width, c.height);
+  ctx.fillStyle = "#0F0";
+  ctx.font = fontSize + "px monospace";
+  for (var i = 0; i < drops.length; i++) {
+    var text = letters[Math.floor(Math.random() * letters.length)];
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+    if (drops[i] * fontSize > c.height && Math.random() > 0.975) drops[i] = 0;
+    drops[i]++;
+  }
+}
+setInterval(draw, 33);
+</script>
+</body>
+</html>
